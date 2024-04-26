@@ -44,12 +44,44 @@ async function run() {
         res.send(result)
     })
 
+    app.get('/touristSpot/:id', async(req,res)=>{
+        const id = req.params.id
+        const query = {_id: new ObjectId(id)}
+        const result = await touristSpotCollection.findOne(query)
+        res.send(result)
+    })
+
 
     app.post('/touristSpot', async (req, res)=>{
         const newSpot = req.body
         console.log(newSpot)
         const result = await touristSpotCollection.insertOne(newSpot);
         res.send(result)
+    })
+
+    app.put('/touristSpot/:id', async(req,res)=>{
+        const id = req.params.id
+        const updatedSpot = req.body
+        console.log(id, updatedSpot)
+        const filter = {_id: new ObjectId(id)}
+        const options = {upsert: true}
+        const spot = {
+            $set: {
+                touristSpotName: updatedSpot.touristSpotName,
+                countryName: updatedSpot.countryName, 
+                location: updatedSpot.location,
+                shortDescription: updatedSpot.shortDescription, 
+                averageCost: updatedSpot.averageCost,
+                seasonality: updatedSpot.seasonality,
+                travelTime: updatedSpot.travelTime,
+                totalVisitorPerYear: updatedSpot.totalVisitorPerYear,
+                photo: updatedSpot.photo
+            }
+        }
+
+        const result = await touristSpotCollection.updateOne(filter, spot, options)
+        res.send(result)
+
     })
 
 
@@ -60,6 +92,7 @@ async function run() {
         const result = await userCollection.insertOne(user);
         res.send(result)
     })
+
   
 
 
