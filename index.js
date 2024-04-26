@@ -27,7 +27,14 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    const spotCollection = client.db('touristSpotDB').collection('touristSpot')
+    const touristSpotCollection = client.db('touristSpotDB').collection('touristSpot')
+
+    app.post('/touristSpot', async (req, res)=>{
+        const newSpot = req.body
+        console.log(newSpot)
+        const result = await touristSpotCollection.insertOne(newSpot);
+        res.send(result)
+    })
 
 
 
