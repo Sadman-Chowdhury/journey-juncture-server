@@ -84,6 +84,15 @@ async function run() {
 
     })
 
+    app.delete('/touristSpot/:id', async(req,res)=>{
+        const id = req.params.id
+        console.log('Delete from database', id)
+        const query = {_id: new ObjectId(id)}
+        const result = await touristSpotCollection.deleteOne(query)
+        res.send(result)
+    })
+
+
 
     // user
     app.post('/user', async (req, res)=>{
