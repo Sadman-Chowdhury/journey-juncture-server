@@ -28,6 +28,7 @@ async function run() {
     await client.connect();
 
     const touristSpotCollection = client.db('touristSpotDB').collection('touristSpot')
+    const countryCollection = client.db('touristSpotDB').collection('country')
     const userCollection = client.db('touristSpotDB').collection('user')
 
 
