@@ -60,6 +60,13 @@ async function run() {
         res.send(result)
     })
 
+    app.post('/country', async (req, res)=>{
+        const newCountry = req.body
+        console.log(newCountry)
+        const result = await countryCollection.insertOne(newCountry);
+        res.send(result)
+    })
+
     app.put('/touristSpot/:id', async(req,res)=>{
         const id = req.params.id
         const updatedSpot = req.body
