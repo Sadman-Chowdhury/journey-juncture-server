@@ -64,7 +64,7 @@ async function run() {
         const newCountry = req.body
         console.log(newCountry)
         const result = await countryCollection.insertOne(newCountry);
-        res.send(result)
+        res.send(result) 
     })
 
     app.put('/touristSpot/:id', async(req,res)=>{
